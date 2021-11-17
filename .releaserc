@@ -4,8 +4,22 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    "@semantic-release/exec",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "make asset"
+      }
+    ],
     "@semantic-release/git",
-    "@semantic-release/github"
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          "CHANGELOG.md",
+          "README.md",
+          "module.zip"
+        ]
+      }
+    ]
   ]
 }

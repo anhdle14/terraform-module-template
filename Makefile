@@ -1,4 +1,7 @@
 # Terraform modules should not have provider configuration block.
+asset:
+	zip module.zip -r *.tf modules
+
 check-provider:
 	grep -q "^provider" *.tf && exit 1 || exit 0
 
@@ -34,4 +37,4 @@ delete:
 	@git rm -f modules/$(module)
 	@rm -rf .git/modules/modules/$(module)
 
-.PHONY: check-provider fmt lint validate test clean add update delete
+.PHONY: asset check-provider fmt lint validate test clean add update delete
