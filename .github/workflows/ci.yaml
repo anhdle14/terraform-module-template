@@ -35,3 +35,23 @@ jobs:
           go-version: "^1.17.2"
       - run: |
           make test
+  semantic-release:
+    name: Semantic Release (dry-run)
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Release
+        run: |
+          npm install -g semantic-release              \
+            "@semantic-release/changelog"              \
+            "@semantic-release/commit-analyzer"        \
+            "@semantic-release/exec"                   \
+            "@semantic-release/git"                    \
+            "@semantic-release/github"                 \
+            "@semantic-release/release-notes-generator"
+          npx semantic-release --dry-run
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
