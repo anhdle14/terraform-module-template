@@ -1,5 +1,5 @@
 module "casting" {
   source = "../../"
 
-  in = "${1 + 2}"
+  in = 1 + 2
 }
