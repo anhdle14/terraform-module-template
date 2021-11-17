@@ -18,6 +18,11 @@ test:
 	cd tests && go test -v ./... -timeout 30m
 
 clean:
+	rm -rf *.zip
+	find . -type f -name 'terraform.*' -exec rm -vrf {} +
+	find . -type d -name '.terraform' -exec rm -vrf {} +
+
+delete-all:
 	@git submodule deinit -f --all
 	@git rm -rf modules/*
 	@rm -rf .git/modules/modules/*
@@ -37,4 +42,4 @@ delete:
 	@git rm -f modules/$(module)
 	@rm -rf .git/modules/modules/$(module)
 
-.PHONY: asset check-provider fmt lint validate test clean add update delete
+.PHONY: asset check-provider fmt lint validate test clean add update delete delete-all
