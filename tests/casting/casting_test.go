@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestTerraformCastingExample(t *testing.T) {
@@ -19,6 +19,14 @@ func TestTerraformCastingExample(t *testing.T) {
 
 	terraform.InitAndApply(t, terraformOptions)
 
-	output := terraform.Output(t, terraformOptions, "out")
-	assert.Equal(t, strconv.Itoa(a), output)
+	output := terraform.OutputMap(t, terraformOptions, "out")
+
+	// expectedLen := 2
+	expectedMap := map[string]string{
+		"upper": strconv.Itoa(a),
+		"lower": strconv.Itoa(a),
+	}
+
+	// require.Len(t, output, expectedLen, "Output should contain %d items", expectedLen)
+	require.Equal(t, expectedMap, output, "Map %q should match %q", expectedMap, output)
 }
