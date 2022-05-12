@@ -1,14 +1,12 @@
 repos:
-    # REFERENCE: https://github.com/pre-commit/pre-commit-hooks
-  - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v4.0.1
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
     hooks:
       - id: end-of-file-fixer
       - id: check-merge-conflict
       - id: trailing-whitespace
-    # REFERENCE: https://github.com/antonbabenko/pre-commit-terraform
-  - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.56.0
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.71.0
     hooks:
       - id: terraform_fmt
       - id: terraform_docs
@@ -27,10 +25,9 @@ repos:
         files: .
         args:
           - "--args=--no-color"
-    # REFERENCE: https://github.com/dnephin/pre-commit-golang
     # Mainly because the test are going to be written by Terratest
   - repo: https://github.com/tekwizely/pre-commit-golang
-    rev: v1.0.0-beta.4
+    rev: v1.0.0-beta.5
     hooks:
       - id: go-fmt
       - id: go-staticcheck-mod
