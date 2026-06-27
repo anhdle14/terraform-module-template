@@ -1,15 +1,19 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.2.0
+    rev: v6.0.0
     hooks:
       - id: end-of-file-fixer
       - id: check-merge-conflict
       - id: trailing-whitespace
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.71.0
+    rev: v1.108.0
     hooks:
       - id: terraform_fmt
       - id: terraform_docs
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+          - --hook-config=--create-file-if-not-exist=true
       - id: terraform_tflint
       - id: terraform_validate
         args:
@@ -21,13 +25,11 @@ repos:
           - "."
           # - "--skip-check"
           # - ""
-      - id: terraform_tfsec
+      - id: terraform_trivy
         files: .
-        args:
-          - "--args=--no-color"
     # Mainly because the test are going to be written by Terratest
   - repo: https://github.com/tekwizely/pre-commit-golang
-    rev: v1.0.0-beta.5
+    rev: v1.0.0-rc.4
     hooks:
       - id: go-fmt
       - id: go-staticcheck-mod

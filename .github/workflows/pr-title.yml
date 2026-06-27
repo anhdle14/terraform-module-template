@@ -1,0 +1,22 @@
+name: PR Title
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+permissions:
+  pull-requests: read
+
+jobs:
+  validate:
+    name: Validate Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      # semantic-release derives the next version from commit/PR titles, so the
+      # PR title must follow https://www.conventionalcommits.org.
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

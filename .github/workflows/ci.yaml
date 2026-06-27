@@ -5,44 +5,55 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   check:
     name: Check
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: |
-          make fmt
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+      - run: make fmt
   unit-test:
     name: Unit Test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: terraform-linters/setup-tflint@v1
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
         with:
-          tflint_version: v0.33.1
-      - run: |
-          make lint
-      - run: |
-          make validate
+          terraform_wrapper: false
+      - uses: terraform-linters/setup-tflint@v6
+        with:
+          tflint_version: latest
+      - run: make lint
+      - run: make validate
   integration-test:
     name: Integration Test
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v3
         with:
-          go-version: "^1.17.2"
-      - run: |
-          make test
+          terraform_wrapper: false
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: tests/go.mod
+          cache-dependency-path: tests/go.sum
+      - run: make test
   semantic-release:
     name: Semantic Release (dry-run)
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v5
         with:
-          node-version: "16"
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
       - name: Release
         run: |
           npm install -g semantic-release              \

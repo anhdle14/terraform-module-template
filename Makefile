@@ -9,9 +9,11 @@ fmt:
 	terraform fmt -check -recursive -no-color
 
 lint:
-	tflint
+	tflint --init
+	tflint --recursive
 
 validate:
+	terraform init -backend=false
 	terraform validate -json
 
 test:

@@ -1,0 +1,6 @@
+# See https://terraform-docs.io/user-guide/configuration/ for all options.
+formatter: "markdown table"
+
+# Generated provider lock files are an implementation detail, not docs.
+settings:
+  lockfile: false

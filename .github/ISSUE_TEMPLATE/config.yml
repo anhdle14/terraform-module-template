@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/anhdle14/terraform-module-template/discussions
+    about: Please ask and answer questions here.

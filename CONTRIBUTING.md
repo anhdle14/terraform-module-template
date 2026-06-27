@@ -7,32 +7,25 @@ This document provides guidelines for contributing to the module.
 - [tfenv](https://github.com/tfutils/tfenv)
 - [terraform](https://learn.hashicorp.com/terraform/getting-started/install#installing-terraform)
   - Can be skipped when `tfenv` is installed.
-- [terraform-docs](https://github.com/segmentio/terraform-docs)
+- [terraform-docs](https://github.com/terraform-docs/terraform-docs)
 - [terratest](https://terratest.gruntwork.io)
 - [golang](https://golang.org/doc/install#install)
 - [staticcheck](https://staticcheck.io)
 - [pre-commit](https://pre-commit.com/#install)
-- [standard-version](https://github.com/conventional-changelog/standard-version)
 - [git-cz](https://www.npmjs.com/package/git-cz)
 - [infracost](https://www.infracost.io)
 - [checkov](https://www.checkov.io)
-- [tfsec](https://tfsec.dev)
+- [trivy](https://trivy.dev) (replaces the now-deprecated tfsec)
 - [makefile](https://www.gnu.org/software/make/manual/make.html)
 
 ### Tests
 
-- Configure golang deps for tests
+- Test dependencies are declared in `tests/go.mod` and fetched automatically by Go modules.
+- Tests live in the `tests/` directory and run against the configurations in `examples/`.
+- Run the whole suite from the repo root:
 
   ```sh
-  go get github.com/gruntwork-io/terratest/modules/terraform
-  go get github.com/stretchr/testify/assert
-  ```
-
-- Tests are available in `test` directory
-- In the test directory, run the below command
-
-  ```sh
-  go test
+  make test
   ```
 
 
@@ -51,16 +44,16 @@ This document provides guidelines for contributing to the module.
   make update module=$NAME version=$VERSION
   ```
 
-- ***Delete**: Will use `git submodule deinit`
+- **Delete**: Will use `git submodule deinit`
 
   ```
-  make update module=$NAME
+  make delete module=$NAME
   ```
 
-- **Clean**: Will use `git submodule deinit` but for all modules
+- **Delete all**: Will use `git submodule deinit` but for all modules
 
   ```
-  make clean
+  make delete-all
   ```
 
 ## References

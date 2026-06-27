@@ -49,6 +49,3 @@ terraform.rc
 
 # Windows exe
 bin/
-
-# Local History for Visual Studio Code
-.history/

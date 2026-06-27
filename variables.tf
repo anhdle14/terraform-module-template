@@ -1,4 +1,5 @@
 variable "in" {
+  type    = string
   default = "Hello, World!"
 
   description = <<EOF
